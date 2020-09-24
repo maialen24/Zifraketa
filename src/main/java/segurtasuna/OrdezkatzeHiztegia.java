@@ -8,19 +8,24 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class OrdezkatzeHiztegia {
+    /*
     ArrayList<Character> mezua=new ArrayList<>();
-    String key=null;
-    //  String key="ZXCVBNMASDFGHJKLQWERTYUIOP";
-    //char[] keyArray=key.toCharArray();
-    String al="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    char[]keyArray=al.toCharArray();
+    //String key=null;   key random bat erabili nahi badugu
+    char[] keyArray=key.toCharArray();
+    //String al="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    //char[]keyArray=al.toCharArray();
     ArrayList kriptograma=new ArrayList();
     ArrayList<Character> alfa=new ArrayList<>();
+*/
 
+    String key="ZXCVBNMASDFGHJKLQWERTYUIOP";
+    ArrayList<Character> alfa=new ArrayList<>();
 
     public OrdezkatzeHiztegia(){
 
     }
+    //Beheko metodo honek array-ak desordenatzen ditu, kasu honetan key desberdinak lortzeko
+    /*
     static void shuffleArray(char[] ar) {
         Random rnd = ThreadLocalRandom.current();
         for (int i = ar.length - 1; i > 0; i--) {
@@ -29,8 +34,10 @@ public class OrdezkatzeHiztegia {
             ar[index] = ar[i];
             ar[i] = a;
         }
-    }
+    }*/
 
+     //Metodo honek aurreko metodoari deia egiten dio key berria lortzeko
+     /*
     public void keySortu(){
         shuffleArray(keyArray);
         key=new String(keyArray);
@@ -38,39 +45,39 @@ public class OrdezkatzeHiztegia {
         /*for(int i=0;i<keyArray.length;i++) {
             System.out.print(keyArray[i]);
         }
-*/
-    }
+    }*/
     public void alfabetoa(){
         for (char a='A';a<='Z';a++){
             alfa.add(a);
         }
     }
-    public ArrayList<Character> zifratu (String pMezua){
-        //KEY RANDOM BIDEZ SORTU
-        char[] mezuArray = pMezua.toCharArray();
+    public String zifratu (String pMezua){
+        alfabetoa();
+        String m= "";
 
-        for (int i = 0; i < mezuArray.length; i++) {
-            if(alfa.contains(mezuArray[i])) {
-                mezua.add(keyArray[alfa.indexOf(mezuArray[i])]);
+        for (int i = 0; i < pMezua.length(); i++) {
+            if(alfa.contains(pMezua.charAt(i))){
+                m=m+(key.charAt(alfa.indexOf(pMezua.charAt(i))));
             }else{
-                mezua.add(mezuArray[i]);
+                m=m+(pMezua.charAt(i));
             }
         }
-        return mezua;
+        return m;
     }
 
-    public ArrayList desZifratu (String pKriptograma,String pkey){
-        char[] kripArray = pKriptograma.toCharArray();
-        for (int i = 0; i < kripArray.length; i++) {
-            if(pkey.contains((String.valueOf(kripArray[i])))){
-                kriptograma.add(alfa.get(pkey.indexOf(kripArray[i])));
+    public String deszifratu (String pKriptograma /*,String pkey*/){ //Key finko bat ez dugunean erabiltzen
+      // key=pkey;
+        String kriptograma="";
+        for (int i = 0; i < pKriptograma.length(); i++) {
+            if(key.contains(pKriptograma.charAt(i)+"")){
+                kriptograma=kriptograma+(alfa.get(key.indexOf(pKriptograma.charAt(i))));
             }else{
-                kriptograma.add(kripArray[i]);
+               kriptograma=kriptograma+(pKriptograma.charAt(i));
             }
         }
         return kriptograma;
     }
-
+/*
     public void inprimatu(ArrayList print){
         System.out.println("Mezua:");
         System.out.println();
@@ -84,7 +91,9 @@ public class OrdezkatzeHiztegia {
             System.out.print(keyArray[i]);
         }
     }
-
+*/
+    //Erabiltzaileak egin nahi duena aukeratzeko, zifratu eta deszifratu metodoei deiak
+    /*
     public void egin() throws IOException {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
@@ -108,7 +117,7 @@ public class OrdezkatzeHiztegia {
                 String krip=br.readLine();
                 System.out.println("Sar ezazu zifratzeko erabili den gakoa");
                 String pkey=br.readLine();
-                inprimatu(desZifratu(krip,pkey));
+                inprimatu(deszifratu(krip,pkey));
             }else if(aukera!=0){
                 System.out.println("Sartu duzun karakterea ez da zuzena");
             }
@@ -116,8 +125,10 @@ public class OrdezkatzeHiztegia {
         }
     }
 
+     */
 
-
+    //Main metodoa terminaletik programa exekutatzeko
+    /*
     public static void main(String[] args) throws IOException {
         // write your code here
         try {
@@ -130,4 +141,5 @@ public class OrdezkatzeHiztegia {
             System.out.println("Sartu duzun karakterea ez da zuzena");
         }
     }
+     */
 }
